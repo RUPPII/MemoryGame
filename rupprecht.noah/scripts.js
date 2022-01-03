@@ -86,17 +86,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.gameGrid');
     const attemptsHolder = document.querySelector('.attemptsHolder');
     const foundHolder = document.querySelector('.foundHolder');
+    const startButton = document.querySelector('.startButton');
+    const playerCount = document.querySelector('.playerCount');
     const cardsInGame = 10;
+    const players = [];
 
-    var attempts = 0
-    var foundCards = 0
-    attemptsHolder.textContent = attempts;
-    foundHolder.textContent = foundCards;
+    var currentPlayer = 0;
+    attemptsHolder.textContent = 0;
+    foundHolder.textContent = 0;
 
     var chosenCards = [];
     var chosenCardsIds = [];
 
+    startButton.addEventListener("click", initiateBoard)
+
     function initiateBoard(){
+        if (Number(playerCount.value) < 0 || Number(playerCount.value) > 4) return;
+        if(playerCount.value){
+            for (var i = 0; i < playerCount; i++) {
+                players.push({ name: "player" + i, attempts: 0, foundCards: 0 })
+            }
+        } else {
+            players.push({ name: "single-player" , attempts: 0, foundCards: 0 })
+        }
         for (var i = 0; i < cardsList.length; i++) {
             var card = document.createElement('img');
             card.setAttribute('src', 'images/placeholder.png');
@@ -108,28 +120,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function flipCard(){
-    if(chosenCards.length !== 2){
-        var cardId = this.attributes["data-id"].value;
-        if(this.attributes["src"].value !== 'images/blank.png'){
-            chosenCards.push(cardsList[cardId].name);
-            chosenCardsIds.push(cardId);
-            this.setAttribute('src', cardsList[cardId].image);
-            if(chosenCards.length === 2){
-                setTimeout(checkForMatch, 400);
+        if(chosenCards.length !== 2){
+            var cardId = this.attributes["data-id"].value;
+            if(this.attributes["src"].value !== 'images/blank.png'){
+                chosenCards.push(cardsList[cardId].name);
+                chosenCardsIds.push(cardId);
+                this.setAttribute('src', cardsList[cardId].image);
+                if(chosenCards.length === 2){
+                    setTimeout(checkForMatch, 400);
+                }
             }
         }
     }
-}
 
     function checkForMatch(){
-        attempts++;
-        console.log(attempts)
+        players[currentPlayer].attempts++;
+        console.log(players[currentPlayer].attempts)
         var cards = document.querySelectorAll('img');
         var firstCard = chosenCardsIds[0];
         var secondCard = chosenCardsIds[1];
         if (chosenCards[0] === chosenCards[1]){
-            foundCards++;
-            console.log(foundCards)
+            players[currentPlayer].foundCards++;
+            console.log(players[currentPlayer].foundCards)
             cards[firstCard].setAttribute('src', 'images/blank.png');
             cards[secondCard].setAttribute('src', 'images/blank.png');
         }else{
@@ -138,13 +150,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         chosenCards = [];
         chosenCardsIds = [];
-        attemptsHolder.textContent = attempts;
-        foundHolder.textContent = foundCards;
-        if (foundCards === cardsInGame){
+        attemptsHolder.textContent = players[currentPlayer].attempts;
+        foundHolder.textContent = players[currentPlayer].foundCards;
+        if (players[currentPlayer].foundCards === cardsInGame){
             alert('Gut gemacht!')
         }
-
+        currentPlayer++;
+        if(currentPlayer > Number(playerCount.value)) currentPlayer = 0;
     }
-
-    initiateBoard();
 })
