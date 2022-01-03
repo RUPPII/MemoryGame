@@ -126,6 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
         for (var i = 0; i < Number(playerCount.value); i++) {
             players.push({ name: "Spieler " + (i+1), attempts: 0, foundCards: 0 })
         }
+        if (players.length === 0) players.push({ name: "Spieler " + (1), attempts: 0, foundCards: 0 })
+
         for (var i = 0; i < cardsList.length; i++) {
             var card = document.createElement('img');
             card.setAttribute('src', 'images/placeholder.png');
