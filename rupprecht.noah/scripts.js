@@ -84,16 +84,37 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     cardsList.sort( () => 0.5 - Math.random() );
     const grid = document.querySelector('.gameGrid');
-    const attemptsHolder = document.querySelector('.attemptsHolder');
-    const foundHolder = document.querySelector('.foundHolder');
+    const attemptsHolder1 = document.querySelector('.attemptsHolder1');
+    const foundHolder1 = document.querySelector('.foundHolder1');
+    const playerName1 = document.querySelector('.playerName1');
+    const attemptsHolder2 = document.querySelector('.attemptsHolder2');
+    const foundHolder2 = document.querySelector('.foundHolder2');
+    const playerName2 = document.querySelector('.playerName2');
+    const attemptsHolder3 = document.querySelector('.attemptsHolder3');
+    const foundHolder3 = document.querySelector('.foundHolder3');
+    const playerName3 = document.querySelector('.playerName3');
+    const attemptsHolder4 = document.querySelector('.attemptsHolder4');
+    const foundHolder4 = document.querySelector('.foundHolder4');
+    const playerName4 = document.querySelector('.playerName4');
     const startButton = document.querySelector('.startButton');
     const playerCount = document.querySelector('.playerCount');
     const cardsInGame = 10;
     const players = [];
 
     var currentPlayer = 0;
-    attemptsHolder.textContent = 0;
-    foundHolder.textContent = 0;
+    attemptsHolder1.textContent = 0;
+    foundHolder1.textContent = 0;
+    playerName1.textContent = "";
+    attemptsHolder2.textContent = 0;
+    foundHolder2.textContent = 0;
+    playerName2.textContent = "";
+    attemptsHolder3.textContent = 0;
+    foundHolder3.textContent = 0;
+    playerName3.textContent = "";
+    attemptsHolder4.textContent = 0;
+    foundHolder4.textContent = 0;
+    playerName4.textContent = "";
+
 
     var chosenCards = [];
     var chosenCardsIds = [];
@@ -102,12 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initiateBoard(){
         if (Number(playerCount.value) < 0 || Number(playerCount.value) > 4) return;
-        if(playerCount.value){
-            for (var i = 0; i < playerCount; i++) {
-                players.push({ name: "player" + i, attempts: 0, foundCards: 0 })
-            }
-        } else {
-            players.push({ name: "single-player" , attempts: 0, foundCards: 0 })
+        for (var i = 0; i < Number(playerCount.value); i++) {
+            players.push({ name: "Spieler " + (i+1), attempts: 0, foundCards: 0 })
         }
         for (var i = 0; i < cardsList.length; i++) {
             var card = document.createElement('img');
@@ -150,12 +167,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         chosenCards = [];
         chosenCardsIds = [];
-        attemptsHolder.textContent = players[currentPlayer].attempts;
-        foundHolder.textContent = players[currentPlayer].foundCards;
+        updatePlayersCount();
+
         if (players[currentPlayer].foundCards === cardsInGame){
             alert('Gut gemacht!')
         }
         currentPlayer++;
-        if(currentPlayer > Number(playerCount.value)) currentPlayer = 0;
+        if(currentPlayer >= Number(playerCount.value)) currentPlayer = 0;
+    }
+
+    function updatePlayersCount() {
+        attemptsHolder1.textContent = players[0].attempts;
+        foundHolder1.textContent = players[0].foundCards;
+        playerName1.textContent = players[0].name;
+        if(players.length === 1) return;
+        attemptsHolder2.textContent = players[1].attempts;
+        foundHolder2.textContent = players[1].foundCards;
+        playerName2.textContent = players[1].name;
+        if(players.length  === 2) return;
+        attemptsHolder3.textContent = players[2].attempts;
+        foundHolder3.textContent = players[2].foundCards;
+        playerName3.textContent = players[2].name;
+        if(players.length  === 3) return;
+        attemptsHolder4.textContent = players[3].attempts;
+        foundHolder4.textContent = players[3].foundCards;
+        playerName4.textContent = players[3].name;
     }
 })
