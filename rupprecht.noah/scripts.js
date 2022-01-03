@@ -120,7 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
     var chosenCardsIds = [];
 
     startButton.addEventListener("click", initiateBoard)
-
+    startButton.addEventListener("click", starttimer)
+    
     function initiateBoard(){
         if (Number(playerCount.value) < 0 || Number(playerCount.value) > 4) return;
         for (var i = 0; i < Number(playerCount.value); i++) {
@@ -195,4 +196,38 @@ document.addEventListener('DOMContentLoaded', () => {
         foundHolder4.textContent = players[3].foundCards;
         playerName4.textContent = players[3].name;
     }
+
+            function starttimer(){
+                let counter = 0;
+                let seconds = "00";
+                let minutes = "00";
+                const getTimerMinutes = (counter) => {
+                  let minuteCounter = Math.floor(counter / 60);
+                  return minuteCounter < 10 ? `0${minuteCounter}` : `${minuteCounter}`;
+                };
+
+                const getTimerSeconds = (counter) => {
+                  let secondCounter = counter % 60;
+                  document.getElementById("second-box").innerHtml =
+                    secondCounter < 10 ? `0${secondCounter}` : `${secondCounter}`;
+                  return secondCounter < 10 ? `0${secondCounter}` : `${secondCounter}`;
+                };
+                const setCount = () => {
+                  seconds = getTimerSeconds(counter);
+                  minutes = getTimerMinutes(counter);
+
+                  document.getElementById("minute-box").innerHtml = seconds;
+                  counter = counter + 1;
+                };
+
+                var intervalId = window.setInterval(function () {
+                  seconds = getTimerSeconds(counter);
+                  minutes = getTimerMinutes(counter);
+                  document.getElementById("minute-box").innerHTML = minutes;
+                  document.getElementById("second-box").innerHTML = seconds;
+                  counter = counter + 1;
+                }, 1000);
+
+        }
+
 })
