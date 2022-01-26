@@ -1,3 +1,15 @@
+h3  {
+    color: #E6AF2E;
+}
+
+body{
+    background: #191716;
+}
+
+p   {
+    color: #E0E2DB;
+}
+
 .container {
     width: 750px;
     margin: 0 auto;
@@ -8,10 +20,32 @@
     flex-wrap: wrap;
     height: 600px;
     width: 100%;
-    border: 1px solid black;
+    border: 5px solid #11998e;
 }
 
 .gameGrid img{
     width: 150px;
     height: 150px;
+}
+
+.startButton, .resetButton{
+    background-color: #11998e;
+    border: none;
+    color: #222222;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.clock {
+    float: right;
+    background-color: #11998e;
+    border: none;
+    color: #222222;
+    text-decoration: none;
+    padding: 16px 32px;
+    margin: 4px 2px;
+    padding-left: 16px;
+    padding-right: 16px;
 }

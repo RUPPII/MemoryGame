@@ -13,14 +13,20 @@
     <body>
         <div class="container">
             <h3>Memory Game !</h3>
-            <input type="number" min="0" max="4" class="playerCount"/>
-            <button class="startButton">start</button>
+            <div class="players">
+                <p>Number of Players:<input type="number" min="0" max="4" class="playerCount"/></p>
+            </div>
+            <div class="players">
+                <p>Number of Pairs:<input type="number" min="5" max="25" class="pairCount"/></p>
+            </div>
+            <button class="startButton">Start</button>
+            <button class="resetButton">Reset</button>
+            <div class="clock"><span id="minute-box">00</span>:<span id="second-box">00</span></div>
             <div class="gameGrid"></div>
             <p class="playerContainer1">Name: <span class="playerName1"></span> Versuche: <span class="attemptsHolder1"></span> Gefunden:<span class="foundHolder1"></span></p>
             <p class="playerContainer2">Name: <span class="playerName2"></span> Versuche: <span class="attemptsHolder2"></span> Gefunden:<span class="foundHolder2"></span></p>
             <p class="playerContainer3">Name: <span class="playerName3"></span> Versuche: <span class="attemptsHolder3"></span> Gefunden:<span class="foundHolder3"></span></p>
             <p class="playerContainer4">Name: <span class="playerName4"></span> Versuche: <span class="attemptsHolder4"></span> Gefunden:<span class="foundHolder4"></span></p>
-            <p><span id="minute-box">00</span>:<span id="second-box">00</span></p>
         </div>
     </body>
 </html>

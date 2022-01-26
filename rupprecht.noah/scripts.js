@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const foundHolder4 = document.querySelector('.foundHolder4');
     const playerName4 = document.querySelector('.playerName4');
     const startButton = document.querySelector('.startButton');
+    const resetButton = document.querySelector('.resetButton');
     const playerCount = document.querySelector('.playerCount');
     const cardsInGame = 10;
     const players = [];
@@ -121,7 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startButton.addEventListener("click", initiateBoard)
     startButton.addEventListener("click", starttimer)
-    
+    resetButton.addEventListener("click", reset)
+
+    function reset(){
+        location.reload();
+    }
+
     function initiateBoard(){
         if (Number(playerCount.value) < 0 || Number(playerCount.value) > 4) return;
         for (var i = 0; i < Number(playerCount.value); i++) {
@@ -197,37 +203,37 @@ document.addEventListener('DOMContentLoaded', () => {
         playerName4.textContent = players[3].name;
     }
 
-            function starttimer(){
-                let counter = 0;
-                let seconds = "00";
-                let minutes = "00";
-                const getTimerMinutes = (counter) => {
-                  let minuteCounter = Math.floor(counter / 60);
-                  return minuteCounter < 10 ? `0${minuteCounter}` : `${minuteCounter}`;
-                };
+    function starttimer(){
+        let counter = 0;
+        let seconds = "00";
+        let minutes = "00";
+        const getTimerMinutes = (counter) => {
+          let minuteCounter = Math.floor(counter / 60);
+          return minuteCounter < 10 ? `0${minuteCounter}` : `${minuteCounter}`;
+        };
 
-                const getTimerSeconds = (counter) => {
-                  let secondCounter = counter % 60;
-                  document.getElementById("second-box").innerHtml =
-                    secondCounter < 10 ? `0${secondCounter}` : `${secondCounter}`;
-                  return secondCounter < 10 ? `0${secondCounter}` : `${secondCounter}`;
-                };
-                const setCount = () => {
-                  seconds = getTimerSeconds(counter);
-                  minutes = getTimerMinutes(counter);
+        const getTimerSeconds = (counter) => {
+          let secondCounter = counter % 60;
+          document.getElementById("second-box").innerHtml =
+            secondCounter < 10 ? `0${secondCounter}` : `${secondCounter}`;
+          return secondCounter < 10 ? `0${secondCounter}` : `${secondCounter}`;
+        };
+        const setCount = () => {
+          seconds = getTimerSeconds(counter);
+          minutes = getTimerMinutes(counter);
 
-                  document.getElementById("minute-box").innerHtml = seconds;
-                  counter = counter + 1;
-                };
+          document.getElementById("minute-box").innerHtml = seconds;
+          counter = counter + 1;
+        };
 
-                var intervalId = window.setInterval(function () {
-                  seconds = getTimerSeconds(counter);
-                  minutes = getTimerMinutes(counter);
-                  document.getElementById("minute-box").innerHTML = minutes;
-                  document.getElementById("second-box").innerHTML = seconds;
-                  counter = counter + 1;
-                }, 1000);
+        var intervalId = window.setInterval(function () {
+          seconds = getTimerSeconds(counter);
+          minutes = getTimerMinutes(counter);
+          document.getElementById("minute-box").innerHTML = minutes;
+          document.getElementById("second-box").innerHTML = seconds;
+          counter = counter + 1;
+        }, 1000);
 
-        }
+    }
 
 })
